@@ -1,0 +1,73 @@
+name: "yolov5",
+platform: "tensorrt_plan"
+backend: "tensorrt"
+max_batch_size: 1
+input [
+  {
+      name: "data"
+      data_type: TYPE_FP32
+      format: FORMAT_NONE
+      dims: [
+    3,
+    640,
+    640
+      ],
+      is_shape_tensor: false
+      allow_ragged_batch: false
+      optional: false
+  }
+]
+output [
+        {
+            name: "num_detections"
+            data_type: TYPE_FP32
+            dims: [
+                1
+            ]
+            label_filename: ""
+            is_shape_tensor: false
+        },
+        {
+            name: "detection_boxes"
+            data_type: TYPE_FP32
+            dims: [
+                25200,
+                4
+            ],
+            label_filename: "",
+            is_shape_tensor: false
+        },
+        {
+            name: "detection_scores"
+            data_type: TYPE_FP32
+            dims: [
+                25200
+            ],
+            label_filename: ""
+            is_shape_tensor: false
+        },
+        {
+            name: "detection_classes"
+            data_type: TYPE_FP32
+            dims: [
+                25200
+            ]
+            label_filename: ""
+            is_shape_tensor: false
+        }
+    ],
+instance_group [
+        {
+            name: "yolov5"
+            kind: KIND_GPU
+            count: 1
+            gpus: [
+                0
+            ],
+            secondary_devices: [],
+            profile: [],
+            passive: false,
+            host_policy: ""
+        }
+],
+default_model_filename: "model.engine"

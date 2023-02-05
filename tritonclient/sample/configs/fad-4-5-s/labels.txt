@@ -1,0 +1,7 @@
+SmallGun
+LongGun
+smartphone
+knife
+wallet
+bill
+card
